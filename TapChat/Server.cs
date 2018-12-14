@@ -89,6 +89,7 @@ namespace TapChat
             foreach (CommunicationSession session in communicationThreads)
                 session.Stop = true;
             stopLoop = true;
+            
         }
 
         
