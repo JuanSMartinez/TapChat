@@ -59,7 +59,8 @@ namespace Client
 
         void ProtocolThread()
         {
-            client = new TcpClient(IpAddress, PortNumber);
+            IPAddress address = Dns.GetHostEntry(IpAddress).AddressList[0];
+            client = new TcpClient(new IPEndPoint(address, PortNumber));
             if (client.Connected)
             {
                 Application.LogMessage("CONNECTED TO SERVER");

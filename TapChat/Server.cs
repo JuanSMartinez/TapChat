@@ -56,7 +56,7 @@ namespace TapChat
                 listener = new TcpListener(Dns.GetHostEntry("localhost").AddressList[0], PortNumber);
             }
             else
-                listener = new TcpListener(IPAddress.Parse(IpAdress), PortNumber);
+                listener = new TcpListener(Dns.GetHostEntry(IpAdress).AddressList[0], PortNumber);
             listener.Start();
             TcpClient client1 = null;
             TcpClient client2 = null;
