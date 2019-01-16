@@ -56,7 +56,23 @@ namespace TapChat
                 listener = new TcpListener(IPAddress.Any, PortNumber);
             }
             else
-                listener = new TcpListener(Dns.GetHostEntry(IpAdress).AddressList[0], PortNumber);
+            {
+                IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName());
+                IPAddress ipAddress = null;
+                foreach (IPAddress addr in ipHostInfo.AddressList)
+                    if (addr.ToString().Equals(IpAdress))
+                        ipAddress = addr;
+                if (ipAddress == null)
+                {
+                    ChatApp.LogMessage("Unable to listen in the specified address");
+                    return;
+                }
+                else
+                {
+                    listener = new TcpListener(ipAddress, PortNumber);
+                }
+            }
+                
             listener.Start();
             TcpClient client1 = null;
             TcpClient client2 = null;
