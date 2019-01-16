@@ -53,7 +53,7 @@ namespace TapChat
             TcpListener listener;
             if (IpAdress.Equals("localhost"))
             {
-                listener = new TcpListener(Dns.GetHostEntry("localhost").AddressList[0], PortNumber);
+                listener = new TcpListener(IPAddress.Any, PortNumber);
             }
             else
                 listener = new TcpListener(Dns.GetHostEntry(IpAdress).AddressList[0], PortNumber);
