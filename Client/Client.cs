@@ -74,8 +74,8 @@ namespace Client
                 {
                     Application.ChangeInputState(false);
                     Application.LogMessage(msg);
-                    //if (!msg.Equals("SAY"))
-                    //    Motu.Instance.PlaySentence(msg, 150, 400);
+                    if (!msg.Equals("SAY"))
+                        Motu.Instance.PlaySentence(msg, 150, 400);
                     while (msgBuffer.Equals("")) ;
                     
                     WriteMessage(msgBuffer);
