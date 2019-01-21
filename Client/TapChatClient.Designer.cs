@@ -147,6 +147,7 @@
             this.Controls.Add(this.txtAddress);
             this.Name = "TapChatClient";
             this.Text = "TapChat Client";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ClosingClient);
             this.ResumeLayout(false);
             this.PerformLayout();
 

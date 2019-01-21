@@ -114,6 +114,7 @@
             this.Controls.Add(this.labelAddress);
             this.Name = "TapChatServer";
             this.Text = "TapChat Server";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ClosingEvent);
             this.ResumeLayout(false);
             this.PerformLayout();
 

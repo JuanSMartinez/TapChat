@@ -46,5 +46,11 @@ namespace TapChat
         {
             server.StopSessions();
         }
+
+        private void ClosingEvent(object sender, FormClosingEventArgs e)
+        {
+            if(server != null)
+                server.StopSessions();
+        }
     }
 }

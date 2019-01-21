@@ -59,5 +59,10 @@ namespace Client
             }
         }
 
+        private void ClosingClient(object sender, FormClosingEventArgs e)
+        {
+            if (client != null)
+                client.StopProtocol();
+        }
     }
 }

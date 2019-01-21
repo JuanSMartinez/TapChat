@@ -5,6 +5,7 @@ using System.Text;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using Taps;
 
 namespace Client
 {
@@ -32,6 +33,9 @@ namespace Client
         //Stop flag
         private bool stop = false;
 
+        //Protocol thread
+        Thread protocolThread;
+
         //Constructor
         public Client(string ipAddress, int portNumber, TapChatClient chatApplication)
         {
@@ -39,12 +43,13 @@ namespace Client
             PortNumber = portNumber;
             Application = chatApplication;
             msgBuffer = "";
+            Motu instance = Motu.Instance;
         }
 
         //Start protocol
         public void StartProtocol()
         {
-            Thread protocolThread = new Thread(new ThreadStart(ProtocolThread));
+            protocolThread = new Thread(new ThreadStart(ProtocolThread));
             protocolThread.Start();
         }
 
@@ -69,6 +74,8 @@ namespace Client
                 {
                     Application.ChangeInputState(false);
                     Application.LogMessage(msg);
+                    //if (!msg.Equals("SAY"))
+                    //    Motu.Instance.PlaySentence(msg, 150, 400);
                     while (msgBuffer.Equals("")) ;
                     
                     WriteMessage(msgBuffer);
@@ -113,6 +120,19 @@ namespace Client
             {
                 stop = true;
         
+            }
+        }
+
+        //Stop communication
+        public void StopProtocol()
+        {
+            stop = true;
+            if (protocolThread != null)
+            {
+                if (client != null)
+                    client.Close();
+                protocolThread.Abort();
+                protocolThread = null;
             }
         }
     }

@@ -11,8 +11,8 @@ namespace TapChat
 {
     public class Server
     {
-
-        
+        //TCP listener
+        TcpListener listener;
 
         //Ip address
         public string IpAdress { get; set; }
@@ -50,7 +50,7 @@ namespace TapChat
         //Infinite listening loop
         void ListenConnections()
         {
-            TcpListener listener;
+            
             if (IpAdress.Equals("localhost"))
             {
                 listener = new TcpListener(IPAddress.Any, PortNumber);
@@ -79,21 +79,28 @@ namespace TapChat
             ChatApp.LogMessage("Listening to connections...");
             while (!stopLoop)
             {
-                TcpClient newClient = listener.AcceptTcpClient();
-                if (client1 == null)
+                try
                 {
-                    client1 = newClient;
-                    ChatApp.LogMessage("First client received");
+                    TcpClient newClient = listener.AcceptTcpClient();
+                    if (client1 == null)
+                    {
+                        client1 = newClient;
+                        ChatApp.LogMessage("First client received");
+                    }
+                    else if (client2 == null)
+                    {
+                        client2 = newClient;
+                        ChatApp.LogMessage("Second client received");
+                        CommunicationSession session = new CommunicationSession(client1, client2, ChatApp);
+                        session.StartSession();
+                        communicationThreads.Add(session);
+                        client1 = null;
+                        client2 = null;
+                    }
                 }
-                else if (client2 == null)
+                catch(Exception)
                 {
-                    client2 = newClient;
-                    ChatApp.LogMessage("Second client received");
-                    CommunicationSession session = new CommunicationSession(client1, client2, ChatApp);
-                    session.StartSession();
-                    communicationThreads.Add(session);
-                    client1 = null;
-                    client2 = null;
+                    break;
                 }
             }
 
@@ -105,7 +112,9 @@ namespace TapChat
             foreach (CommunicationSession session in communicationThreads)
                 session.Stop = true;
             stopLoop = true;
-            
+            if(listener != null)
+                listener.Stop();
+            ChatApp.LogMessage("Server Stopped");
         }
 
         
