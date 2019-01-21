@@ -35,12 +35,17 @@
             this.btnConnect = new System.Windows.Forms.Button();
             this.txtLog = new System.Windows.Forms.TextBox();
             this.butStop = new System.Windows.Forms.Button();
+            this.txtSend = new System.Windows.Forms.TextBox();
+            this.txtReceived = new System.Windows.Forms.TextBox();
+            this.butSend = new System.Windows.Forms.Button();
+            this.labelSend = new System.Windows.Forms.Label();
+            this.labelReceived = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labelAddress
             // 
             this.labelAddress.AutoSize = true;
-            this.labelAddress.Location = new System.Drawing.Point(150, 100);
+            this.labelAddress.Location = new System.Drawing.Point(31, 52);
             this.labelAddress.Name = "labelAddress";
             this.labelAddress.Size = new System.Drawing.Size(61, 13);
             this.labelAddress.TabIndex = 0;
@@ -48,7 +53,7 @@
             // 
             // txtAddress
             // 
-            this.txtAddress.Location = new System.Drawing.Point(153, 116);
+            this.txtAddress.Location = new System.Drawing.Point(34, 68);
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(100, 20);
             this.txtAddress.TabIndex = 1;
@@ -57,7 +62,7 @@
             // labelPortNumber
             // 
             this.labelPortNumber.AutoSize = true;
-            this.labelPortNumber.Location = new System.Drawing.Point(304, 100);
+            this.labelPortNumber.Location = new System.Drawing.Point(185, 52);
             this.labelPortNumber.Name = "labelPortNumber";
             this.labelPortNumber.Size = new System.Drawing.Size(69, 13);
             this.labelPortNumber.TabIndex = 2;
@@ -65,7 +70,7 @@
             // 
             // txtPort
             // 
-            this.txtPort.Location = new System.Drawing.Point(307, 116);
+            this.txtPort.Location = new System.Drawing.Point(188, 68);
             this.txtPort.Name = "txtPort";
             this.txtPort.Size = new System.Drawing.Size(100, 20);
             this.txtPort.TabIndex = 3;
@@ -73,7 +78,7 @@
             // 
             // btnConnect
             // 
-            this.btnConnect.Location = new System.Drawing.Point(153, 165);
+            this.btnConnect.Location = new System.Drawing.Point(34, 117);
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(75, 23);
             this.btnConnect.TabIndex = 4;
@@ -83,7 +88,7 @@
             // 
             // txtLog
             // 
-            this.txtLog.Location = new System.Drawing.Point(153, 223);
+            this.txtLog.Location = new System.Drawing.Point(34, 200);
             this.txtLog.Multiline = true;
             this.txtLog.Name = "txtLog";
             this.txtLog.Size = new System.Drawing.Size(254, 139);
@@ -91,7 +96,7 @@
             // 
             // butStop
             // 
-            this.butStop.Location = new System.Drawing.Point(307, 165);
+            this.butStop.Location = new System.Drawing.Point(188, 117);
             this.butStop.Name = "butStop";
             this.butStop.Size = new System.Drawing.Size(75, 23);
             this.butStop.TabIndex = 6;
@@ -99,12 +104,63 @@
             this.butStop.UseVisualStyleBackColor = true;
             this.butStop.Click += new System.EventHandler(this.StopServer);
             // 
+            // txtSend
+            // 
+            this.txtSend.Location = new System.Drawing.Point(365, 49);
+            this.txtSend.Multiline = true;
+            this.txtSend.Name = "txtSend";
+            this.txtSend.ReadOnly = true;
+            this.txtSend.Size = new System.Drawing.Size(215, 117);
+            this.txtSend.TabIndex = 7;
+            // 
+            // txtReceived
+            // 
+            this.txtReceived.Location = new System.Drawing.Point(365, 200);
+            this.txtReceived.Multiline = true;
+            this.txtReceived.Name = "txtReceived";
+            this.txtReceived.ReadOnly = true;
+            this.txtReceived.Size = new System.Drawing.Size(215, 139);
+            this.txtReceived.TabIndex = 8;
+            // 
+            // butSend
+            // 
+            this.butSend.Location = new System.Drawing.Point(612, 97);
+            this.butSend.Name = "butSend";
+            this.butSend.Size = new System.Drawing.Size(75, 23);
+            this.butSend.TabIndex = 9;
+            this.butSend.Text = "Send";
+            this.butSend.UseVisualStyleBackColor = true;
+            this.butSend.Click += new System.EventHandler(this.sendMessage);
+            // 
+            // labelSend
+            // 
+            this.labelSend.AutoSize = true;
+            this.labelSend.Location = new System.Drawing.Point(362, 33);
+            this.labelSend.Name = "labelSend";
+            this.labelSend.Size = new System.Drawing.Size(35, 13);
+            this.labelSend.TabIndex = 10;
+            this.labelSend.Text = "Send:";
+            // 
+            // labelReceived
+            // 
+            this.labelReceived.AutoSize = true;
+            this.labelReceived.Location = new System.Drawing.Point(362, 184);
+            this.labelReceived.Name = "labelReceived";
+            this.labelReceived.Size = new System.Drawing.Size(56, 13);
+            this.labelReceived.TabIndex = 11;
+            this.labelReceived.Text = "Received:";
+            // 
             // TapChatServer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.labelReceived);
+            this.Controls.Add(this.labelSend);
+            this.Controls.Add(this.butSend);
+            this.Controls.Add(this.txtReceived);
+            this.Controls.Add(this.txtSend);
             this.Controls.Add(this.butStop);
             this.Controls.Add(this.txtLog);
             this.Controls.Add(this.btnConnect);
@@ -129,6 +185,11 @@
         private System.Windows.Forms.Button btnConnect;
         private System.Windows.Forms.TextBox txtLog;
         private System.Windows.Forms.Button butStop;
+        private System.Windows.Forms.TextBox txtSend;
+        private System.Windows.Forms.TextBox txtReceived;
+        private System.Windows.Forms.Button butSend;
+        private System.Windows.Forms.Label labelSend;
+        private System.Windows.Forms.Label labelReceived;
     }
 }
 

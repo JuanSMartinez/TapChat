@@ -13,6 +13,8 @@ namespace TapChat
     {
         Server server;
         delegate void SetLogCallback(string text);
+        delegate void WriteReceivedCallback(string text);
+        delegate void ChangeInputStateCallback(bool state);
 
         public TapChatServer()
         {
@@ -42,15 +44,48 @@ namespace TapChat
             }
         }
 
+        public void ReceiveMessage(string message)
+        {
+            if(txtReceived.InvokeRequired)
+            {
+                WriteReceivedCallback callbak = new WriteReceivedCallback(ReceiveMessage);
+                Invoke(callbak, new object[] { message });
+            }
+            else
+            {
+                txtReceived.AppendText(message);
+                txtReceived.AppendText(Environment.NewLine);
+            }
+        }
+
         private void StopServer(object sender, EventArgs e)
         {
-            server.StopSessions();
+            server.StopSession();
         }
 
         private void ClosingEvent(object sender, FormClosingEventArgs e)
         {
             if(server != null)
-                server.StopSessions();
+                server.StopSession();
+        }
+
+        public void ChangeInputState(bool state)
+        {
+            if (txtSend.InvokeRequired)
+            {
+                ChangeInputStateCallback callback = new ChangeInputStateCallback(ChangeInputState);
+                Invoke(callback, new object[] { state });
+            }
+            else
+            {
+                txtSend.Text = "";
+                txtSend.ReadOnly = state;
+            }
+        }
+
+        private void sendMessage(object sender, EventArgs e)
+        {
+            server.SendMessage(txtSend.Text);
         }
     }
 }
