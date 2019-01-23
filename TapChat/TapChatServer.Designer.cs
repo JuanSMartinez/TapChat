@@ -40,6 +40,11 @@
             this.butSend = new System.Windows.Forms.Button();
             this.labelSend = new System.Windows.Forms.Label();
             this.labelReceived = new System.Windows.Forms.Label();
+            this.txtICI = new System.Windows.Forms.TextBox();
+            this.txtIWI = new System.Windows.Forms.TextBox();
+            this.labelICI = new System.Windows.Forms.Label();
+            this.labelIWI = new System.Windows.Forms.Label();
+            this.butSet = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // labelAddress
@@ -124,7 +129,7 @@
             // 
             // butSend
             // 
-            this.butSend.Location = new System.Drawing.Point(612, 97);
+            this.butSend.Location = new System.Drawing.Point(612, 143);
             this.butSend.Name = "butSend";
             this.butSend.Size = new System.Drawing.Size(75, 23);
             this.butSend.TabIndex = 9;
@@ -150,12 +155,59 @@
             this.labelReceived.TabIndex = 11;
             this.labelReceived.Text = "Received:";
             // 
+            // txtICI
+            // 
+            this.txtICI.Location = new System.Drawing.Point(34, 369);
+            this.txtICI.Name = "txtICI";
+            this.txtICI.Size = new System.Drawing.Size(75, 20);
+            this.txtICI.TabIndex = 12;
+            // 
+            // txtIWI
+            // 
+            this.txtIWI.Location = new System.Drawing.Point(129, 369);
+            this.txtIWI.Name = "txtIWI";
+            this.txtIWI.Size = new System.Drawing.Size(75, 20);
+            this.txtIWI.TabIndex = 13;
+            // 
+            // labelICI
+            // 
+            this.labelICI.AutoSize = true;
+            this.labelICI.Location = new System.Drawing.Point(31, 353);
+            this.labelICI.Name = "labelICI";
+            this.labelICI.Size = new System.Drawing.Size(23, 13);
+            this.labelICI.TabIndex = 14;
+            this.labelICI.Text = "ICI:";
+            // 
+            // labelIWI
+            // 
+            this.labelIWI.AutoSize = true;
+            this.labelIWI.Location = new System.Drawing.Point(126, 353);
+            this.labelIWI.Name = "labelIWI";
+            this.labelIWI.Size = new System.Drawing.Size(27, 13);
+            this.labelIWI.TabIndex = 15;
+            this.labelIWI.Text = "IWI:";
+            // 
+            // butSet
+            // 
+            this.butSet.Location = new System.Drawing.Point(220, 367);
+            this.butSet.Name = "butSet";
+            this.butSet.Size = new System.Drawing.Size(68, 23);
+            this.butSet.TabIndex = 16;
+            this.butSet.Text = "Set";
+            this.butSet.UseVisualStyleBackColor = true;
+            this.butSet.Click += new System.EventHandler(this.SetParameters);
+            // 
             // TapChatServer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.butSet);
+            this.Controls.Add(this.labelIWI);
+            this.Controls.Add(this.labelICI);
+            this.Controls.Add(this.txtIWI);
+            this.Controls.Add(this.txtICI);
             this.Controls.Add(this.labelReceived);
             this.Controls.Add(this.labelSend);
             this.Controls.Add(this.butSend);
@@ -190,6 +242,11 @@
         private System.Windows.Forms.Button butSend;
         private System.Windows.Forms.Label labelSend;
         private System.Windows.Forms.Label labelReceived;
+        private System.Windows.Forms.TextBox txtICI;
+        private System.Windows.Forms.TextBox txtIWI;
+        private System.Windows.Forms.Label labelICI;
+        private System.Windows.Forms.Label labelIWI;
+        private System.Windows.Forms.Button butSet;
     }
 }
 

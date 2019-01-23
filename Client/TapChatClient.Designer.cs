@@ -38,11 +38,16 @@
             this.label2 = new System.Windows.Forms.Label();
             this.butSend = new System.Windows.Forms.Button();
             this.btnConnect = new System.Windows.Forms.Button();
+            this.txtICI = new System.Windows.Forms.TextBox();
+            this.txtIWI = new System.Windows.Forms.TextBox();
+            this.butSet = new System.Windows.Forms.Button();
+            this.labelICI = new System.Windows.Forms.Label();
+            this.labelIWI = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtAddress
             // 
-            this.txtAddress.Location = new System.Drawing.Point(161, 110);
+            this.txtAddress.Location = new System.Drawing.Point(161, 65);
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(100, 20);
             this.txtAddress.TabIndex = 0;
@@ -50,7 +55,7 @@
             // 
             // txtPort
             // 
-            this.txtPort.Location = new System.Drawing.Point(273, 109);
+            this.txtPort.Location = new System.Drawing.Point(273, 64);
             this.txtPort.Name = "txtPort";
             this.txtPort.Size = new System.Drawing.Size(100, 20);
             this.txtPort.TabIndex = 1;
@@ -59,7 +64,7 @@
             // labelAddress
             // 
             this.labelAddress.AutoSize = true;
-            this.labelAddress.Location = new System.Drawing.Point(161, 91);
+            this.labelAddress.Location = new System.Drawing.Point(161, 46);
             this.labelAddress.Name = "labelAddress";
             this.labelAddress.Size = new System.Drawing.Size(48, 13);
             this.labelAddress.TabIndex = 2;
@@ -68,7 +73,7 @@
             // labelPort
             // 
             this.labelPort.AutoSize = true;
-            this.labelPort.Location = new System.Drawing.Point(270, 91);
+            this.labelPort.Location = new System.Drawing.Point(270, 46);
             this.labelPort.Name = "labelPort";
             this.labelPort.Size = new System.Drawing.Size(69, 13);
             this.labelPort.TabIndex = 3;
@@ -122,7 +127,7 @@
             // 
             // btnConnect
             // 
-            this.btnConnect.Location = new System.Drawing.Point(379, 107);
+            this.btnConnect.Location = new System.Drawing.Point(379, 62);
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(75, 23);
             this.btnConnect.TabIndex = 9;
@@ -130,11 +135,58 @@
             this.btnConnect.UseVisualStyleBackColor = true;
             this.btnConnect.Click += new System.EventHandler(this.connectToServer);
             // 
+            // txtICI
+            // 
+            this.txtICI.Location = new System.Drawing.Point(161, 111);
+            this.txtICI.Name = "txtICI";
+            this.txtICI.Size = new System.Drawing.Size(100, 20);
+            this.txtICI.TabIndex = 10;
+            // 
+            // txtIWI
+            // 
+            this.txtIWI.Location = new System.Drawing.Point(273, 111);
+            this.txtIWI.Name = "txtIWI";
+            this.txtIWI.Size = new System.Drawing.Size(100, 20);
+            this.txtIWI.TabIndex = 11;
+            // 
+            // butSet
+            // 
+            this.butSet.Location = new System.Drawing.Point(379, 108);
+            this.butSet.Name = "butSet";
+            this.butSet.Size = new System.Drawing.Size(75, 23);
+            this.butSet.TabIndex = 12;
+            this.butSet.Text = "Set";
+            this.butSet.UseVisualStyleBackColor = true;
+            this.butSet.Click += new System.EventHandler(this.SetParameters);
+            // 
+            // labelICI
+            // 
+            this.labelICI.AutoSize = true;
+            this.labelICI.Location = new System.Drawing.Point(161, 95);
+            this.labelICI.Name = "labelICI";
+            this.labelICI.Size = new System.Drawing.Size(23, 13);
+            this.labelICI.TabIndex = 13;
+            this.labelICI.Text = "ICI:";
+            // 
+            // labelIWI
+            // 
+            this.labelIWI.AutoSize = true;
+            this.labelIWI.Location = new System.Drawing.Point(270, 95);
+            this.labelIWI.Name = "labelIWI";
+            this.labelIWI.Size = new System.Drawing.Size(27, 13);
+            this.labelIWI.TabIndex = 14;
+            this.labelIWI.Text = "IWI:";
+            // 
             // TapChatClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.labelIWI);
+            this.Controls.Add(this.labelICI);
+            this.Controls.Add(this.butSet);
+            this.Controls.Add(this.txtIWI);
+            this.Controls.Add(this.txtICI);
             this.Controls.Add(this.btnConnect);
             this.Controls.Add(this.butSend);
             this.Controls.Add(this.label2);
@@ -165,6 +217,11 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button butSend;
         private System.Windows.Forms.Button btnConnect;
+        private System.Windows.Forms.TextBox txtICI;
+        private System.Windows.Forms.TextBox txtIWI;
+        private System.Windows.Forms.Button butSet;
+        private System.Windows.Forms.Label labelICI;
+        private System.Windows.Forms.Label labelIWI;
     }
 }
 

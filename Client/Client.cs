@@ -36,6 +36,12 @@ namespace Client
         //Protocol thread
         Thread protocolThread;
 
+        //ICI
+        public int ICI { get; set; }
+
+        //IWI
+        public int IWI { get; set; }
+
         //Constructor
         public Client(string ipAddress, int portNumber, TapChatClient chatApplication)
         {
@@ -44,6 +50,18 @@ namespace Client
             Application = chatApplication;
             msgBuffer = "";
             Motu instance = Motu.Instance;
+            ICI = 150;
+            IWI = 500;
+        }
+
+        public Client( TapChatClient chatApplication)
+        {
+
+            Application = chatApplication;
+            msgBuffer = "";
+            Motu instance = Motu.Instance;
+            ICI = 150;
+            IWI = 500;
         }
 
         //Start protocol
@@ -74,8 +92,10 @@ namespace Client
                 {
                     Application.ChangeInputState(false);
                     Application.LogMessage(msg);
-                    if (!msg.Equals("SAY"))
-                        Motu.Instance.PlaySentence(msg, 150, 400);
+                    if (!msg.Equals("SAY") && Motu.Instance.IsInitialized())
+                        Motu.Instance.PlaySentence(msg, ICI, IWI);
+                    else
+                        Application.LogMessage("MOTU not initialized yet");
                     while (msgBuffer.Equals("")) ;
                     
                     WriteMessage(msgBuffer);

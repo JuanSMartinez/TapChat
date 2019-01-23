@@ -19,13 +19,15 @@ namespace TapChat
         public TapChatServer()
         {
             InitializeComponent();
+            server = new Server( this);
         }
 
         private void StartServer(object sender, EventArgs e)
         {
             string address = txtAddress.Text;
             string port = txtPort.Text;
-            server = new Server(address, int.Parse(port), this);
+            server.PortNumber = int.Parse(port);
+            server.IpAdress = address;
             server.StartListening();
         }
 
@@ -86,6 +88,21 @@ namespace TapChat
         private void sendMessage(object sender, EventArgs e)
         {
             server.SendMessage(txtSend.Text);
+        }
+
+        private void SetParameters(object sender, EventArgs e)
+        {
+            try
+            {
+                int ici = int.Parse(txtICI.Text);
+                int iwi = int.Parse(txtIWI.Text);
+                server.ICI = ici;
+                server.IWI = iwi;
+            }
+            catch(Exception ex)
+            {
+                LogMessage("Invalid ICI and/or IWI values");
+            }
         }
     }
 }

@@ -18,11 +18,14 @@ namespace Client
         public TapChatClient()
         {
             InitializeComponent();
+            client = new Client(this);
         }
 
         private void connectToServer(object sender, EventArgs e)
         {
-            client = new Client(txtAddress.Text, int.Parse(txtPort.Text), this);
+
+            client.PortNumber = int.Parse(txtPort.Text);
+            client.IpAddress = txtAddress.Text;
             client.StartProtocol();
         }
 
@@ -63,6 +66,21 @@ namespace Client
         {
             if (client != null)
                 client.StopProtocol();
+        }
+
+        private void SetParameters(object sender, EventArgs e)
+        {
+            try
+            {
+                int ici = int.Parse(txtICI.Text);
+                int iwi = int.Parse(txtIWI.Text);
+                client.ICI = ici;
+                client.IWI = iwi;
+            }
+            catch (Exception ex)
+            {
+                LogMessage("Invalid ICI and/or IWI values");
+            }
         }
     }
 }

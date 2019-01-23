@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.Windows.Forms;
+using Taps;
 
 namespace TapChat
 {
@@ -39,6 +40,12 @@ namespace TapChat
         //Message buffer
         string msgBuffer = "";
 
+        //ICI
+        public int ICI { get; set; }
+
+        //IWI
+        public int IWI { get; set; }
+
         //Lock object
         private static object lockObj = new object();
 
@@ -48,7 +55,17 @@ namespace TapChat
             IpAdress = ipAddress;
             PortNumber = portNumber;
             ChatApp = chatServerApp;
-      
+            Motu instance = Motu.Instance;
+            ICI = 150;
+            IWI = 500;
+        }
+
+        public Server(TapChatServer chatServerApp)
+        {
+            ChatApp = chatServerApp;
+            Motu instance = Motu.Instance;
+            ICI = 150;
+            IWI = 500;
         }
 
         //Start listening
@@ -139,6 +156,10 @@ namespace TapChat
                 ChatApp.ChangeInputState(true);
                 string msg = GetMessageFromClient(client);
                 ChatApp.ReceiveMessage(msg);
+                if (!msg.Equals("SAY") && Motu.Instance.IsInitialized())
+                    Motu.Instance.PlaySentence(msg, ICI, IWI);
+                else
+                    ChatApp.ReceiveMessage("MOTU not initialized yet");
                 ChatApp.ChangeInputState(false);
                 while (msgBuffer.Equals("")) ;
                 WriteMessageToClient(client, msgBuffer);
@@ -155,6 +176,12 @@ namespace TapChat
             stop = true;
             if(listener != null)
                 listener.Stop();
+            if(listenThread != null)
+            {
+                listenThread.Abort();
+                listenThread = null;
+            }
+            
             ChatApp.LogMessage("Server Stopped");
         }
 
